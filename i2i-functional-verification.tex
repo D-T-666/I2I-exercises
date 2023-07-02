@@ -1,17 +1,15 @@
-\documentclass{article}
+\documentclass[fleqn]{article}
 \usepackage[margin=2cm]{geometry}
 
 \usepackage{amsmath}
 \usepackage{mathtools}
+
 \usepackage{listings}
-
 \usepackage{xcolor}
-
 \definecolor{codegreen}{rgb}{0,0.9,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{keyword}{rgb}{0.9,0.3,0.1}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
-
 \lstdefinestyle{mystyle}{
     commentstyle=\color{codegreen},
     keywordstyle=\color{keyword},
@@ -40,13 +38,15 @@
 \title{I2I-2 Functional Verification Example Excercises}
 \author{Dimitri Tabatadze}
 
-\newcommand*{\eq}[2]{\hspace{10pt}\stackrel{\mathmakebox[\widthof{=}]{\mathrm{\texttt{#1}}}}{=}\hspace{10pt}\texttt{#2}}
+\newcommand*{\eq}[2]{\hspace{30pt}\stackrel{\mathmakebox[\widthof{=}]{\mathrm{\texttt{#1}}}}{=}\hspace{30pt}\begin{minipage}[t]{0.55\linewidth}\texttt{#2}\end{minipage}}
 
 \begin{document}
     \maketitle
 
     \input{sections/dacentrili}
+    \input{sections/dacentrili-solution}
     \input{sections/even-list}
+    \input{sections/even-list-solution}
     \input{sections/bigotree}
 
 \end{document}

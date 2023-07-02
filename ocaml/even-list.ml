@@ -1,11 +1,8 @@
-let rec even_list a lst = match lst with
-  | h::_::t -> even_list (h::a) t
-  | [h] -> even_list (h::a) []
+let rec el a lst = match lst with
+  | h::_::t -> el (h::a) t
+  | [h] -> el (h::a) []
   | _ -> a
 
-let rec deal i a lst = match lst with
-  | h::t -> if i mod 2 = 0 then
-      deal (i+1) (h::a) t
-    else
-      deal (i+1) a t
+let rec de i a lst = match lst with
+  | h::t -> de (i+1) (if i mod 2 = 0 then h::a else a) t
   | _ -> a
