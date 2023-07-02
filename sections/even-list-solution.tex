@@ -1,0 +1,60 @@
+\subsection*{Solution}
+
+To prove that
+\begin{center}
+    \texttt{de 0 [] l = el [] l}
+\end{center}
+we generalize and try to prove
+\begin{center}
+    \texttt{de (2*i) a l = el a l}
+\end{center}
+
+Induction on the list \texttt{l}
+\begin{itemize}
+    \item {
+        Base case 1: \texttt{l = []}
+
+        \begin{displaymath}
+            \begin{aligned}
+                \texttt{de (2*i) a l} 
+                &\eq{de,def l,match}{a} \\
+                &\eq{match,def l,el}{el a l} \\
+            \end{aligned}
+        \end{displaymath}
+    }
+    \item {
+        Base case 2: \texttt{l = [h] = h::[]}
+
+        \begin{displaymath}
+            \begin{aligned}
+                \texttt{de (2*i) a l} 
+                &\eq{de,def l}{match h::[] with
+                | h::t -> de (2*i+1) (if 2*i mod 2 = 0 then h::a else a) t
+                | [] -> a} \\
+                &\eq{match}{de (2*i+1) (if 2*i mod 2 = 0 then h::a else a) []} \\
+                &\eq{if}{de (2*i+1) (h::a) []} \\
+                &\eq{de,match}{h::a} \\
+                &\eq{match,el}{el (h::a) []} \\
+                &\eq{match,el}{el a [h]} \\
+                &\eq{def l}{el a l} \\
+            \end{aligned}
+        \end{displaymath}
+    }
+    \item {
+        Induction step: \texttt{l = h1::h2::t}
+
+        \begin{displaymath}
+            \begin{aligned}
+                \texttt{de (2*i) a l} 
+                &\eq{de,def l}{match h1::h2::t with
+                | h::t -> de (2*i+1) (if 2*i mod 2 = 0 then h::a else a) t | [] -> a} \\
+                &\eq{match}{de (2*i+1) (if 2*i mod 2 = 0 then h1::a else a) h2::t} \\
+                &\eq{if,de,match}{de (2*i+2) (if 2*i+1 mod 2 = 0 then h2::h1::a else h1::a) t} \\
+                &\eq{if}{de (2*i+2) (h1::a) t} \\
+                &\eq{I.H.}{el (h1::a) t} \\
+                &\eq{match,el}{el a (h1::h2::t)} \\
+                &\eq{def l}{el a l)} \\
+            \end{aligned}
+        \end{displaymath}
+    }
+\end{itemize}
