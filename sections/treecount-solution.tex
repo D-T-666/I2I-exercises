@@ -1,0 +1,31 @@
+\subsection*{Solution}
+
+\begin{itemize}
+    \item {
+        Case 1: \texttt{t = Leaf}
+
+        \begin{displaymath}
+            \begin{aligned}
+                \texttt{countleaves t}
+                &\eq{countleaves}{match t with Leaf  -> 1 | Inner (l, r) -> countleaves l + countleaves r} \\
+                &\eq{def t,match}{1} \\
+                &\eq{arith}{0 + 1} \\
+                &\eq{match,countinner}{countinner t + 1} 
+            \end{aligned}
+        \end{displaymath}
+    }
+    \item {
+        Case 2: \texttt{t = Inner (a, b)}
+
+        \begin{displaymath}
+            \begin{aligned}
+                \texttt{countleaves t}
+                &\eq{countleaves}{match t with Leaf  -> 1 | Inner (l, r) -> countleaves l + countleaves r} \\
+                &\eq{def t,match}{countleaves a + countleaves b} \\
+                &\eq{I.H.}{(countinner a + 1) + (countinner b + 1)} \\
+                &\eq{arith}{(1 + countinner a + countinner b) + 1} \\
+                &\eq{match,couninner,def}{countinner t + 1}
+            \end{aligned}
+        \end{displaymath}
+    }
+\end{itemize}
