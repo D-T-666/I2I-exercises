@@ -1,0 +1,22 @@
+\subsection*{Solution}
+
+To prove that
+\begin{center}
+    \texttt{tolist (totree Empty l) = sort l}
+\end{center}
+we need to fist prove that
+\textbf{Lemma 1:}
+\begin{center}
+    \texttt{tolist t = sort (tolist t)}
+\end{center}
+holds. We do this by induction on \texttt{t}
+\begin{itemize}
+    \item {
+        Case 1: \texttt{t = Empty}
+
+        \begin{displaymath}
+            \texttt{tolist t} \\
+            &\eq{tolist,def t,match}{[]} \\
+        \end{displaymath}
+    }
+\end{itemize}
