@@ -1,0 +1,9 @@
+\section{Fun With Fold}
+The following OCaml functions are given:
+\lstinputlisting{ocaml/fun-with-fold.ml}
+Prove that the equality
+\begin{center}
+    \begin{lstlisting}
+f1 (+) 0 (rev_map (fun x -> x * 2) l []) = fr (fun x a -> a + 2 * x) l 0\end{lstlisting}
+\end{center}
+holds.

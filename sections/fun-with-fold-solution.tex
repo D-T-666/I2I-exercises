@@ -1,0 +1,78 @@
+\subsection*{Solution}
+
+To prove the given equality, we first generalize and try to prove that
+\begin{center}
+    \texttt{fl (+) b (rev\_map (fun x -> x * 2) l a) = (fr (fun x a -> a + 2 * x) l b) + (fr (+) a 0)}
+\end{center}
+
+Let's proove that
+\begin{center}
+    \texttt{fl (+) b a = b + (fr (+) a 0)}
+\end{center}
+
+\begin{displaymath}
+    \begin{aligned}
+        \texttt{fl (+) b a = }
+        &\eq{arith,(+)}{fl (+) ((+) 0 b) a} \\
+        &\eq{fl}{fl (+) 0 (b::a)} \\
+        &\eq{I.H.}{0 + fr (+) (b::a) 0} \\
+        &\eq{arith}{fr (+) (b::a) 0} \\
+        &\eq{(+)}{(+) b (fr (+) a 0)} \\
+        &\eq{(+)}{b + (fr (+) a 0)}
+    \end{aligned}
+\end{displaymath}
+
+% We prove the equality by induction on the length of \texttt{l} with the induction hypothesis:
+% \begin{center}
+%     \texttt{}
+% \end{center}
+% \begin{itemize}
+%     \item {
+%         Base case: \texttt{l = []}
+
+%         \begin{displaymath}
+%             \begin{aligned}
+%                 \texttt{fl (+) b (rev\_map (fun x -> x * 2) l a)}
+%                 &\eq{rev\_map,def l,match}{fl (+) b a} \\
+%             \end{aligned}
+%         \end{displaymath}
+%         \begin{itemize}
+%             \item {
+%                 Case 1: \texttt{a = []}
+%                 \begin{displaymath}
+%                     \begin{aligned}
+%                         &\eq{def a}{fl (+) b []}\\
+%                         &\eq{fl,match}{b}\\
+%                         &\eq{match}{match a with [] -> b | x::xs -> f x (fr (fun x a -> a + 2 * x) xs b)}\\
+%                         &\eq{fr,def a}{fr (fun x a -> a + 2 * x) ([] @ a) b}
+%                     \end{aligned}
+%                 \end{displaymath}
+%             }
+%             \item {
+%                 Case 2: \texttt{a = x::xs}
+%                 \begin{displaymath}
+%                     \begin{aligned}
+%                         &\eq{def a}{fl (+) b (x::xs)}\\
+%                         &\eq{fl,match}{fl (+) ((+) b x) xs}\\
+%                         &\eq{(+)}{fl (+) (b + x) xs}\\
+%                         % 
+%                     \end{aligned}
+%                 \end{displaymath}
+%             }
+%         \end{itemize}
+%     }
+    % \item {
+    %     Case 2: \texttt{t = Inner (a, b)}
+
+    %     \begin{displaymath}
+    %         \begin{aligned}
+    %             \texttt{countleaves t}
+    %             &\eq{countleaves}{match t with Leaf  -> 1 | Inner (l, r) -> countleaves l + countleaves r} \\
+    %             &\eq{def t,match}{countleaves a + countleaves b} \\
+    %             &\eq{I.H.}{(countinner a + 1) + (countinner b + 1)} \\
+    %             &\eq{arith}{(1 + countinner a + countinner b) + 1} \\
+    %             &\eq{match,couninner,def}{countinner t + 1}
+    %         \end{aligned}
+    %     \end{displaymath}
+    % }
+% \end{itemize}

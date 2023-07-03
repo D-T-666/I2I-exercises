@@ -9,16 +9,93 @@ To prove that
 we need to fist prove that
 \textbf{Lemma 1:}
 \begin{center}
-    \texttt{tolist t = sort (tolist t)}
+    \texttt{tolist (insertintree v t) = insert v (tolist t)}
 \end{center}
 holds. We do this by induction on \texttt{t}
 \begin{itemize}
     \item {
-        Case 1: \texttt{t = Empty}
+        Base case: \texttt{t = Empty}
 
         \begin{displaymath}
-            \texttt{tolist t} \\
-            % &\eq{tolist,def t,match}{[]} \\
+            \begin{aligned}
+                \texttt{tolist (insertintree v t)}
+                &\eq{insertintree,def t}{tolist (Inner (Empty, v, Empty))} \\
+                &\eq{tolist,match}{tolist Empty @ [v] @ tolist Empty} \\
+                &\eq{tolist,match}{[] @ [v] @ []} \\
+                &\eq{@}{[v]} \\
+                &\eq{match,insert}{insert v []} \\
+                &\eq{match,tolist}{insert v (tolist Empty)} \\
+                &\eq{def t}{insert v (tolist t)}
+            \end{aligned}
+        \end{displaymath}
+    }
+    \item {
+        Induction step: \texttt{t = Inner (l, x, r)}
+
+        \begin{displaymath}
+            \begin{aligned}
+                \texttt{tolist (insertintree v t)}
+                &\eq{insertintree,def t}{tolist (if v > x then Inner (l, x, insertintree v r) else Inner (insertintree v l, x, r))} \\
+            \end{aligned}
+        \end{displaymath}
+        \begin{itemize}
+            \item {
+                Case 1: \texttt{v > x}
+                \begin{displaymath}
+                    \begin{aligned}
+                        \phantom{\texttt{tolist (insertintr}}
+                        &\eq{def x}{tolist (Inner (l, x, insertintree v r))} \\
+                        &\eq{tolist,match}{tolist l @ [x] @ tolist (insertintree v r)} \\
+                        &\eq{I.H.}{tolist l @ [x] @ (insert v (tolist r))} \\
+                        &\eq{Lemma 2.}{insert v (tolist l @ [x] @ tolist r)} \\
+                        &\eq{tolist,def t}{insert v (tolist t)}
+                    \end{aligned}
+                \end{displaymath}
+            }
+            \item {
+                Case 1: \texttt{v <= x}
+                \begin{displaymath}
+                    \begin{aligned}
+                        \phantom{\texttt{tolist (insertintr}}
+                        &\eq{def x}{tolist (Inner (insertintree v l, x, r))} \\
+                        &\eq{tolist,match}{tolist (insertintree v l) @ [x] @ tolist r} \\
+                        &\eq{I.H.}{insert v (tolist l) @ [x] @ tolist r} \\
+                        &\eq{@,@}{insert v (tolist l @ [x] @ tolist r)} \\
+                        &\eq{tolist,def t}{insert v (tolist t)}
+                    \end{aligned}
+                \end{displaymath}
+            }
+        \end{itemize}
+
+        We now need to prove \textbf{Lemma 2}. Invariant: \texttt{lst} is a sorted list and every element is \texttt{< v}. \texttt{lst = x::xs}
+        \begin{center}
+            \texttt{lst @ (insert v (tolist r)) = insert v (lst @ tolist r)}
+        \end{center}
+        \begin{displaymath}
+            \begin{aligned}
+                \texttt{insert v (lst @ tolist r))}
+                &\eq{def lst}{insert v (x::xs @ tolist r)} \\
+                &\eq{insert,match,if}{x::(insert v (xs @ tolist r))} \\
+                &\eq{I.H.}{x::(xs @ (insert v (tolist r)))} \\
+                &\eq{associativity}{x::xs @ (insert v (tolist r))} \\
+                &\eq{def lst}{lst @ (insert v (tolist r))} \\
+            \end{aligned}
+        \end{displaymath}
+    }
+\end{itemize}
+
+
+Now we start the main proof with induction on length \(n\) of \texttt{l}
+
+\begin{itemize}
+    \item {
+        Base case: \(n = 0\) \texttt{l = []}
+
+        \begin{displaymath}
+            \begin{aligned}
+                \texttt{tolist (totree Empty l)}
+                &\eq{totree,def l}{tolist (Empty)} \\
+            \end{aligned}
         \end{displaymath}
     }
 \end{itemize}
